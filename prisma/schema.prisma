@@ -9,3 +9,51 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model usuarios {
+  id Int @id @default(autoincrement())
+  nome String
+  email String
+  senha String
+  telefone String
+  logradouro String
+  cidade String
+  created_at DateTime @default(now())
+  pedido pedidos[]
+}
+
+model estabelecimentos {
+  id Int @id @default(autoincrement())
+  nome String
+  telefone String
+  logradouro String
+  cidade String
+  created_at DateTime @default(now())
+  prato pratos[]
+  pedido pedidos[]
+}
+
+model pratos {
+  id Int @id @default(autoincrement())
+  id_estabelecimento Int @unique
+  nome String
+  ingredientes String
+  created_at DateTime @default(now())
+  estabelecimento estabelecimentos @relation(fields: [id_estabelecimento],references: [id])
+  pedido pedidos[]
+}
+
+model pedidos {
+  id Int @id @default(autoincrement())
+  id_usuario Int
+  id_estabelecimento Int
+  id_prato Int 
+  tipo_pagamento String
+  comentarios String
+  valor Float
+  status String
+  created_at DateTime @default(now())
+  usuario usuarios @relation(fields: [id_usuario],references: [id])
+  estabelecimento estabelecimentos @relation(fields: [id_estabelecimento],references: [id])
+  prato pratos @relation(fields: [id_prato],references: [id])
+}
