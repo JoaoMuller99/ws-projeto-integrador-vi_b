@@ -48,7 +48,6 @@ model pedidos {
   id Int @id @default(autoincrement())
   id_usuario Int
   id_estabelecimento Int
-  id_prato Int 
   tipo_pagamento String
   comentarios String
   valor Float
@@ -56,5 +55,5 @@ model pedidos {
   created_at DateTime @default(now())
   usuario usuarios @relation(fields: [id_usuario],references: [id])
   estabelecimento estabelecimentos @relation(fields: [id_estabelecimento],references: [id])
-  prato pratos @relation(fields: [id_prato],references: [id])
+  prato pratos[]
 }
