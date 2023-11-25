@@ -37,6 +37,6 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(newUser);
   } catch (e) {
-    return NextResponse.json({ error: "An error ocurred while trying to create a user" }, { status: 404 });
+    return NextResponse.json({ error: String(e) || "An error ocurred while trying to create a user" }, { status: 404 });
   }
 }
