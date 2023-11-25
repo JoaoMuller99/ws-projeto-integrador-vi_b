@@ -39,6 +39,7 @@ model pratos {
   nome String
   ingredientes String
   valor Float @default(0)
+  img String @default("")
   created_at DateTime @default(now())
   estabelecimento estabelecimentos @relation(fields: [id_estabelecimento],references: [id])
   pedido pedidos[]
