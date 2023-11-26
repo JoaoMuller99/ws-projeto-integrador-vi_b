@@ -5,10 +5,11 @@ export async function POST(request: NextRequest) {
   try {
     const data = await request.json();
 
-    if (!data.nome || !data.email || !data.senha || !data.telefone)
+    if (!data.nome || !data.email || !data.logradouro || !data.cidade || !data.senha || !data.telefone)
       return NextResponse.json(
         {
-          error: "Missing properties: to create a user you need to provide the following properties - 'nome', 'email', 'senha' and 'telefone'",
+          error:
+            "Missing properties: to create a user you need to provide the following properties - 'nome', 'email', 'logradouro', 'cidade', 'senha' and 'telefone'",
         },
         { status: 404 }
       );
@@ -29,8 +30,8 @@ export async function POST(request: NextRequest) {
         nome: data.nome,
         email: data.email,
         senha: data.senha,
-        logradouro: "",
-        cidade: "",
+        logradouro: data.logradouro,
+        cidade: data.cidade,
         telefone: data.telefone,
       },
     });
