@@ -6,7 +6,17 @@ export async function POST(request: NextRequest) {
     const data = await request.json();
 
     const newOrder = await prisma.pedidos.create({
-      data,
+      data: {
+        id_usuario: data.id_usuario,
+        id_estabelecimento: data.id_estabelecimento,
+        tipo_pagamento: data.tipo_pagamento,
+        comentarios: data.comentarios,
+        valor: data.valor,
+        status: data.status,
+        prato: {
+          create: data.pratos.map((prato: number) => ({ prato: { connect: { id: prato } } })),
+        },
+      },
     });
 
     return NextResponse.json(newOrder);
