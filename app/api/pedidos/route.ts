@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
         valor: data.valor,
         status: data.status,
         prato: {
-          create: data.pratos.map((item: any) => ({ prato: { connect: { item } } })),
+          connect: data.pratos.map((item: any) => ({ id: item.id })),
         },
       },
     });
