@@ -5,7 +5,7 @@ export async function POST(request: NextRequest) {
   try {
     const data = await request.json();
 
-    if (!data.nome || !data.email || !data.logradouro || !data.cidade || !data.telefone || !data.senha)
+    if (!data.nome || !data.email || !data.logradouro || !data.cidade || !data.senha || !data.telefone)
       return NextResponse.json(
         {
           error:
